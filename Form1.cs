@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 // using UDP;
 
 namespace Colimator_Control_GUI
@@ -18,6 +22,7 @@ namespace Colimator_Control_GUI
 #else
         bool DEBUG = true;
 #endif
+        string Serial1PortName, Serial1BaudRate, Serial1DataBits, Serial1StopBits, Serial1Parity, dataIN1, dataOUT1;
 
         // Lock for app path
         private static readonly object _lock = new object();
@@ -43,10 +48,110 @@ namespace Colimator_Control_GUI
         public Form1()
         {
             InitializeComponent();
+            try
+            {
+                using (XmlTextReader configReader = new XmlTextReader(AppPath + "Config_Col.xml"))
+                {
+                    // Move to <Configuration>
+                    while (configReader.Read())
+                    {
+                        if (configReader.NodeType == XmlNodeType.Element && configReader.Name == "Configuration")
+                            break;
+                    }
+
+                    // Now read the configuration elements inside <Configuration>
+                    while (configReader.Read())
+                    {
+                        if (configReader.NodeType == XmlNodeType.Element)
+                        {
+                            string elementName = configReader.Name;
+                            string s1 = configReader.ReadElementContentAsString();
+
+                            switch (elementName)
+                            {
+                                case "SerialPort1":
+                                    Serial1PortName = getBetween(s1, "name=", 4);
+                                    Serial1BaudRate = getBetween(s1, "baudrate=", 5);
+                                    Serial1DataBits = getBetween(s1, "databits=", 1);
+                                    Serial1StopBits = getBetween(s1, "stopbits=", 3);
+                                    Serial1Parity = getBetween(s1, "parity=", 4);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        // Stop if we reach the end of <Configuration>
+                        if (configReader.NodeType == XmlNodeType.EndElement && configReader.Name == "Configuration")
+                            break;
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            CheckPortsNames();
+            this.TopMost = true;
+
         }
+
+        void CheckPortsNames()
+        {
+            string[] ports = SerialPort.GetPortNames();
+            for (int i = 0; i < ports.Length; i++)
+            {
+                if (Serial1PortName == ports[i])
+                {
+                    OpenSerial1();
+                }
+            }
+        }
+
+        public async void OpenSerial1()     // Serial Port para la comunicacion con el Software Digirad
+        {
+            serialPort1.PortName = Serial1PortName;
+            serialPort1.BaudRate = int.Parse(Serial1BaudRate);  // 115200  Valid values are 110, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, or 115200.
+            serialPort1.DataBits = int.Parse(Serial1DataBits);
+            serialPort1.StopBits = (StopBits)Enum.Parse(typeof(StopBits), Serial1StopBits);
+            serialPort1.Parity = (Parity)Enum.Parse(typeof(Parity), Serial1Parity);
+            serialPort1.Encoding = Encoding.GetEncoding("iso-8859-1");
+            // Encoding = Encoding.GetEncoding("Windows-1252");
+            serialPort1.Open();
+            serialPort1.DtrEnable = false;
+            await Task.Delay(50);
+            serialPort1.DtrEnable = true;
+            await Task.Delay(100);
+        }
+
+        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            dataIN1 = serialPort1.ReadLine();
+            this.Invoke(new EventHandler(ShowData1));
+        }
+
+        private void ShowData1(object sender, EventArgs e)
+        {
+            // if (DEBUG) DisplayData(1, dataIN1);
+            textBoxSerial.Text = dataIN1;
+            if (dataIN1.Contains("Ax"))
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
 
         private void buttonIrisOpen_Click(object sender, EventArgs e)
         {
+            if (serialPort1.IsOpen)
+            {
+                dataOUT1 = "K+";
+                serialPort1.WriteLine(dataOUT1);
+            }
 
         }
 
@@ -92,7 +197,11 @@ namespace Colimator_Control_GUI
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
-
+            serialPort1.DtrEnable = false;
+            Thread.Sleep(50);
+            serialPort1.DtrEnable = true;
+            Thread.Sleep(100);
+            serialPort1.DtrEnable = false;
         }
 
         private void buttonWriteM0_Click(object sender, EventArgs e)
@@ -108,6 +217,19 @@ namespace Colimator_Control_GUI
         private void buttonWriteM2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        public static string getBetween(string strSource, string strStart, int largo)
+        {
+            if (strSource.Contains(strStart))
+            {
+                int Start, End;
+                Start = strSource.IndexOf(strStart, 0) + strStart.Length;
+                End = Start + largo;
+                return strSource.Substring((Start + 1), End - Start);
+            }
+
+            return "";
         }
     }
 }

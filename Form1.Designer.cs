@@ -51,7 +51,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxUDP = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxSerial = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
+            // 
+            // serialPort1
+            // 
+            this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
             // 
             // buttonIrisOpen
             // 
@@ -247,11 +253,29 @@
             this.textBoxUDP.Size = new System.Drawing.Size(75, 20);
             this.textBoxUDP.TabIndex = 20;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(252, 235);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 13);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Serial Data";
+            // 
+            // textBoxSerial
+            // 
+            this.textBoxSerial.Location = new System.Drawing.Point(255, 252);
+            this.textBoxSerial.Name = "textBoxSerial";
+            this.textBoxSerial.Size = new System.Drawing.Size(75, 20);
+            this.textBoxSerial.TabIndex = 22;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(369, 301);
+            this.Controls.Add(this.textBoxSerial);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.textBoxUDP);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -304,6 +328,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxUDP;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxSerial;
     }
 }
 
