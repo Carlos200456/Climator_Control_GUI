@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colimator_Control_GUI", "Colimator_Control_GUI.csproj", "{55AA6F51-3F74-4342-89E0-7B7F47BC5CDD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E7C84BFE-D841-434C-B773-5FCC5BDAAE65} = {E7C84BFE-D841-434C-B773-5FCC5BDAAE65}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleUDP", "..\VISUB_Control\SimpleUDP\SimpleUDP.csproj", "{E7C84BFE-D841-434C-B773-5FCC5BDAAE65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55AA6F51-3F74-4342-89E0-7B7F47BC5CDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55AA6F51-3F74-4342-89E0-7B7F47BC5CDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55AA6F51-3F74-4342-89E0-7B7F47BC5CDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55AA6F51-3F74-4342-89E0-7B7F47BC5CDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7C84BFE-D841-434C-B773-5FCC5BDAAE65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7C84BFE-D841-434C-B773-5FCC5BDAAE65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7C84BFE-D841-434C-B773-5FCC5BDAAE65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7C84BFE-D841-434C-B773-5FCC5BDAAE65}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
