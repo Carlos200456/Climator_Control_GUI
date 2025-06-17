@@ -53,6 +53,7 @@
             this.textBoxUDP = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxSerial = new System.Windows.Forms.TextBox();
+            this.buttonCE = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // serialPort1
@@ -67,7 +68,8 @@
             this.buttonIrisOpen.TabIndex = 0;
             this.buttonIrisOpen.Text = "Iris Open";
             this.buttonIrisOpen.UseVisualStyleBackColor = true;
-            this.buttonIrisOpen.Click += new System.EventHandler(this.buttonIrisOpen_Click);
+            this.buttonIrisOpen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonIrisOpen_MouseDown);
+            this.buttonIrisOpen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonIrisOpen_MouseUp);
             // 
             // buttonIrisClose
             // 
@@ -77,7 +79,8 @@
             this.buttonIrisClose.TabIndex = 1;
             this.buttonIrisClose.Text = "Iris Close";
             this.buttonIrisClose.UseVisualStyleBackColor = true;
-            this.buttonIrisClose.Click += new System.EventHandler(this.buttonIrisClose_Click);
+            this.buttonIrisClose.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonIrisClose_MouseDown);
+            this.buttonIrisClose.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonIrisClose_MouseUp);
             // 
             // buttonVColOpen
             // 
@@ -87,7 +90,8 @@
             this.buttonVColOpen.TabIndex = 2;
             this.buttonVColOpen.Text = "Coll Open";
             this.buttonVColOpen.UseVisualStyleBackColor = true;
-            this.buttonVColOpen.Click += new System.EventHandler(this.buttonVColOpen_Click);
+            this.buttonVColOpen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonVColsOpen_MouseDown);
+            this.buttonVColOpen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonVColOpen_MouseUp);
             // 
             // buttonVColClose
             // 
@@ -97,7 +101,8 @@
             this.buttonVColClose.TabIndex = 3;
             this.buttonVColClose.Text = "Coll Close";
             this.buttonVColClose.UseVisualStyleBackColor = true;
-            this.buttonVColClose.Click += new System.EventHandler(this.buttonVColClose_Click);
+            this.buttonVColClose.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonVColsClose_MouseDown);
+            this.buttonVColClose.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonVColClose_MouseUp);
             // 
             // buttonRotCW
             // 
@@ -107,7 +112,8 @@
             this.buttonRotCW.TabIndex = 4;
             this.buttonRotCW.Text = "Rot CW";
             this.buttonRotCW.UseVisualStyleBackColor = true;
-            this.buttonRotCW.Click += new System.EventHandler(this.buttonRotCW_Click);
+            this.buttonRotCW.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonRotCW_MouseDown);
+            this.buttonRotCW.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonRotCW_MouseUp);
             // 
             // buttonRotCCW
             // 
@@ -117,7 +123,8 @@
             this.buttonRotCCW.TabIndex = 5;
             this.buttonRotCCW.Text = "Rot CCW";
             this.buttonRotCCW.UseVisualStyleBackColor = true;
-            this.buttonRotCCW.Click += new System.EventHandler(this.buttonRotCCW_Click);
+            this.buttonRotCCW.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonRotCCW_MouseDown);
+            this.buttonRotCCW.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonRotCCW_MouseUp);
             // 
             // buttonReset
             // 
@@ -269,11 +276,22 @@
             this.textBoxSerial.Size = new System.Drawing.Size(75, 20);
             this.textBoxSerial.TabIndex = 22;
             // 
+            // buttonCE
+            // 
+            this.buttonCE.Location = new System.Drawing.Point(12, 220);
+            this.buttonCE.Name = "buttonCE";
+            this.buttonCE.Size = new System.Drawing.Size(75, 35);
+            this.buttonCE.TabIndex = 23;
+            this.buttonCE.Text = "Clear EEPROM";
+            this.buttonCE.UseVisualStyleBackColor = true;
+            this.buttonCE.Click += new System.EventHandler(this.buttonCE_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(369, 301);
+            this.Controls.Add(this.buttonCE);
             this.Controls.Add(this.textBoxSerial);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBoxUDP);
@@ -330,6 +348,7 @@
         private System.Windows.Forms.TextBox textBoxUDP;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBoxSerial;
+        private System.Windows.Forms.Button buttonCE;
     }
 }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
   <Configuration>
-    <SerialPort1>       name="COM6" baudrate="57600" stopbits="One" parity="None" databits="8" </SerialPort1>
+    <SerialPort1>       name="COM1" baudrate="19200" stopbits="One" parity="None" databits="8" </SerialPort1>
   </Configuration>
 </root>
