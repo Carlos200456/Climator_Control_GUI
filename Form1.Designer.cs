@@ -69,7 +69,7 @@
             this.buttonIrisOpen.Text = "Iris Open";
             this.buttonIrisOpen.UseVisualStyleBackColor = true;
             this.buttonIrisOpen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonIrisOpen_MouseDown);
-            this.buttonIrisOpen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonIrisOpen_MouseUp);
+            this.buttonIrisOpen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonIris_MouseUp);
             // 
             // buttonIrisClose
             // 
@@ -80,7 +80,7 @@
             this.buttonIrisClose.Text = "Iris Close";
             this.buttonIrisClose.UseVisualStyleBackColor = true;
             this.buttonIrisClose.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonIrisClose_MouseDown);
-            this.buttonIrisClose.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonIrisClose_MouseUp);
+            this.buttonIrisClose.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonIris_MouseUp);
             // 
             // buttonVColOpen
             // 
