@@ -43,17 +43,11 @@
             this.buttonM0 = new System.Windows.Forms.Button();
             this.buttonM1 = new System.Windows.Forms.Button();
             this.buttonM2 = new System.Windows.Forms.Button();
-            this.textBoxIris = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.textBoxP1 = new System.Windows.Forms.TextBox();
             this.textBoxP2 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxUDP = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBoxSerial = new System.Windows.Forms.TextBox();
             this.buttonCE = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // serialPort1
@@ -196,85 +190,19 @@
             this.buttonM2.UseVisualStyleBackColor = true;
             this.buttonM2.Click += new System.EventHandler(this.buttonM2_Click);
             // 
-            // textBoxIris
-            // 
-            this.textBoxIris.Location = new System.Drawing.Point(174, 212);
-            this.textBoxIris.Name = "textBoxIris";
-            this.textBoxIris.Size = new System.Drawing.Size(45, 20);
-            this.textBoxIris.TabIndex = 13;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(174, 194);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 13);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "ADC Iris";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(236, 194);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 13);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "ADC P1";
-            // 
             // textBoxP1
             // 
-            this.textBoxP1.Location = new System.Drawing.Point(236, 212);
+            this.textBoxP1.Location = new System.Drawing.Point(185, 192);
             this.textBoxP1.Name = "textBoxP1";
             this.textBoxP1.Size = new System.Drawing.Size(45, 20);
             this.textBoxP1.TabIndex = 16;
             // 
             // textBoxP2
             // 
-            this.textBoxP2.Location = new System.Drawing.Point(298, 212);
+            this.textBoxP2.Location = new System.Drawing.Point(185, 221);
             this.textBoxP2.Name = "textBoxP2";
             this.textBoxP2.Size = new System.Drawing.Size(45, 20);
             this.textBoxP2.TabIndex = 17;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(298, 194);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 13);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "ADC P2";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(174, 235);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 13);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "UDP Data";
-            // 
-            // textBoxUDP
-            // 
-            this.textBoxUDP.Location = new System.Drawing.Point(174, 252);
-            this.textBoxUDP.Name = "textBoxUDP";
-            this.textBoxUDP.Size = new System.Drawing.Size(75, 20);
-            this.textBoxUDP.TabIndex = 20;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(252, 235);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 13);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "Serial Data";
-            // 
-            // textBoxSerial
-            // 
-            this.textBoxSerial.Location = new System.Drawing.Point(255, 252);
-            this.textBoxSerial.Name = "textBoxSerial";
-            this.textBoxSerial.Size = new System.Drawing.Size(75, 20);
-            this.textBoxSerial.TabIndex = 22;
             // 
             // buttonCE
             // 
@@ -286,22 +214,36 @@
             this.buttonCE.UseVisualStyleBackColor = true;
             this.buttonCE.Click += new System.EventHandler(this.buttonCE_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(236, 191);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Hi Speed";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(236, 220);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 25;
+            this.button2.Text = "Low Speed";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 301);
+            this.ClientSize = new System.Drawing.Size(358, 282);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonCE);
-            this.Controls.Add(this.textBoxSerial);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBoxUDP);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxP2);
             this.Controls.Add(this.textBoxP1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxIris);
             this.Controls.Add(this.buttonM2);
             this.Controls.Add(this.buttonM1);
             this.Controls.Add(this.buttonM0);
@@ -338,17 +280,11 @@
         private System.Windows.Forms.Button buttonM0;
         private System.Windows.Forms.Button buttonM1;
         private System.Windows.Forms.Button buttonM2;
-        private System.Windows.Forms.TextBox textBoxIris;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxP1;
         private System.Windows.Forms.TextBox textBoxP2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBoxUDP;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBoxSerial;
         private System.Windows.Forms.Button buttonCE;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

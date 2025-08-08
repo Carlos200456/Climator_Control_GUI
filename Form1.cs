@@ -92,29 +92,29 @@ namespace Colimator_Control_GUI
                 MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            System.Windows.Forms.Button existingButton2 = buttonIrisOpen;
-            System.Windows.Forms.Button existingButton3 = buttonIrisClose;
+            System.Windows.Forms.Button existingButton1 = buttonIrisOpen;
+            System.Windows.Forms.Button existingButton2 = buttonIrisClose;
             // Remove button2 and button3 from the form
+            this.Controls.Remove(existingButton1);
             this.Controls.Remove(existingButton2);
-            this.Controls.Remove(existingButton3);
-            CustomButton ButtonUp = new CustomButton();
-            CustomButton ButtonDown = new CustomButton();
-            ButtonUp.Location = existingButton2.Location;
-            ButtonUp.Size = existingButton2.Size;
-            ButtonUp.Text = existingButton2.Text;
-            ButtonUp.Font = existingButton2.Font;
-            ButtonUp.MouseDown += buttonIrisOpen_MouseDown;
-            ButtonUp.MouseUp += buttonIris_MouseUp;
+            CustomButton ButtonIrisOpen = new CustomButton();
+            CustomButton ButtonIrisClose = new CustomButton();
+            ButtonIrisOpen.Location = existingButton1.Location;
+            ButtonIrisOpen.Size = existingButton1.Size;
+            ButtonIrisOpen.Text = existingButton1.Text;
+            ButtonIrisOpen.Font = existingButton1.Font;
+            ButtonIrisOpen.MouseDown += buttonIrisOpen_MouseDown;
+            ButtonIrisOpen.MouseUp += buttonIris_MouseUp;
             // ... Set any other properties you need ...
-            this.Controls.Add(ButtonUp);
-            ButtonDown.Location = existingButton3.Location;
-            ButtonDown.Size = existingButton3.Size;
-            ButtonDown.Text = existingButton3.Text;
-            ButtonDown.Font = existingButton3.Font;
-            ButtonDown.MouseDown += buttonIrisClose_MouseDown;
-            ButtonDown.MouseUp += buttonIris_MouseUp;
+            this.Controls.Add(ButtonIrisOpen);
+            ButtonIrisClose.Location = existingButton2.Location;
+            ButtonIrisClose.Size = existingButton2.Size;
+            ButtonIrisClose.Text = existingButton2.Text;
+            ButtonIrisClose.Font = existingButton2.Font;
+            ButtonIrisClose.MouseDown += buttonIrisClose_MouseDown;
+            ButtonIrisClose.MouseUp += buttonIris_MouseUp;
             // ... Set any other properties you need ...
-            this.Controls.Add(ButtonDown);
+            this.Controls.Add(ButtonIrisClose);
 
             CheckPortsNames();
             this.TopMost = true;
@@ -169,7 +169,7 @@ namespace Colimator_Control_GUI
             if (string.IsNullOrEmpty(s))
                 return;
 
-            textBoxUDP.Text = s;
+          //  textBoxUDP.Text = s;
 
             switch (s)
             {
@@ -218,30 +218,34 @@ namespace Colimator_Control_GUI
 
         private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-            dataIN1 = serialPort1.ReadLine();
-            if (this.IsHandleCreated)
+            try
             {
-                this.Invoke(new EventHandler(ShowData1));
+                dataIN1 = serialPort1.ReadLine();
+                if (this.IsHandleCreated)
+                {
+                    this.Invoke(new EventHandler(ShowData1));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error reading data from serial port: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void ShowData1(object sender, EventArgs e)
         {
             // Separate DataIN in I= , S= , etc
-            if (dataIN1.Contains("I="))
+            if (dataIN1.Contains("HS="))
             {
-                textBoxIris.Text = getBetween(dataIN1, "I=", 3);
+                textBoxP1.Text = getBetween(dataIN1, "HS=", 3);
             }
-            if (dataIN1.Contains("S="))
+            if (dataIN1.Contains("LS="))
             {
-                textBoxP1.Text = getBetween(dataIN1, "S=", 3);
-            }
-            if (dataIN1.Contains("R="))
-            {
-                textBoxP2.Text = getBetween(dataIN1, "R=", 3);
+                textBoxP2.Text = getBetween(dataIN1, "LS=", 3);
             }
 
-            textBoxSerial.Text = dataIN1;
+            // textBoxSerial.Text = dataIN1;
             if (dataIN1.Contains("Ax"))
             {
 
@@ -377,6 +381,25 @@ namespace Colimator_Control_GUI
                 dataOUT1 = "IM2";
                 serialPort1.WriteLine(dataOUT1);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (serialPort1.IsOpen)
+            {
+                dataOUT1 = "SH" + textBoxP1.Text;
+                serialPort1.WriteLine(dataOUT1);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (serialPort1.IsOpen)
+            {
+                dataOUT1 = "SL" + textBoxP2.Text;
+                serialPort1.WriteLine(dataOUT1);
+            }
+
         }
 
         private void buttonCE_Click(object sender, EventArgs e)
