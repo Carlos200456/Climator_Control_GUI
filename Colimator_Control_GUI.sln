@@ -5,8 +5,6 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colimator_Control_GUI", "Colimator_Control_GUI.csproj", "{55AA6F51-3F74-4342-89E0-7B7F47BC5CDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUDP", "..\VISUB_Control\TestUDP\TestUDP.csproj", "{46A2D2C0-4A5E-466C-AA95-9F02E7D8AE6F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{55AA6F51-3F74-4342-89E0-7B7F47BC5CDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55AA6F51-3F74-4342-89E0-7B7F47BC5CDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55AA6F51-3F74-4342-89E0-7B7F47BC5CDD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{46A2D2C0-4A5E-466C-AA95-9F02E7D8AE6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46A2D2C0-4A5E-466C-AA95-9F02E7D8AE6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{46A2D2C0-4A5E-466C-AA95-9F02E7D8AE6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{46A2D2C0-4A5E-466C-AA95-9F02E7D8AE6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

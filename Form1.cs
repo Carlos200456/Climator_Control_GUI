@@ -45,7 +45,6 @@ namespace Colimator_Control_GUI
 
         // Create an isntance of UDP with Serial Splitter
         SimpleUDP u = new SimpleUDP(45004);
-
         public Form1()
         {
             InitializeComponent();
@@ -94,11 +93,23 @@ namespace Colimator_Control_GUI
 
             System.Windows.Forms.Button existingButton1 = buttonIrisOpen;
             System.Windows.Forms.Button existingButton2 = buttonIrisClose;
+            System.Windows.Forms.Button existingButton3 = buttonVColOpen;
+            System.Windows.Forms.Button existingButton4 = buttonVColClose;
+            System.Windows.Forms.Button existingButton5 = buttonRotCW;
+            System.Windows.Forms.Button existingButton6 = buttonRotCCW;
             // Remove button2 and button3 from the form
             this.Controls.Remove(existingButton1);
             this.Controls.Remove(existingButton2);
+            this.Controls.Remove(existingButton3);
+            this.Controls.Remove(existingButton4);
+            this.Controls.Remove(existingButton5);
+            this.Controls.Remove(existingButton6);
             CustomButton ButtonIrisOpen = new CustomButton();
             CustomButton ButtonIrisClose = new CustomButton();
+            CustomButton ButtonVColOpen = new CustomButton();
+            CustomButton ButtonVColClose = new CustomButton();
+            CustomButton ButtonRotCW = new CustomButton();
+            CustomButton ButtonRotCCW = new CustomButton();
             ButtonIrisOpen.Location = existingButton1.Location;
             ButtonIrisOpen.Size = existingButton1.Size;
             ButtonIrisOpen.Text = existingButton1.Text;
@@ -115,77 +126,41 @@ namespace Colimator_Control_GUI
             ButtonIrisClose.MouseUp += buttonIris_MouseUp;
             // ... Set any other properties you need ...
             this.Controls.Add(ButtonIrisClose);
+            ButtonVColOpen.Location = existingButton3.Location;
+            ButtonVColOpen.Size = existingButton3.Size;
+            ButtonVColOpen.Text = existingButton3.Text;
+            ButtonVColOpen.Font = existingButton3.Font;
+            ButtonVColOpen.MouseDown += buttonVColOpen_MouseDown;
+            ButtonVColOpen.MouseUp += buttonVCol_MouseUp;
+            // ... Set any other properties you need ...
+            this.Controls.Add(ButtonVColOpen);
+            ButtonVColClose.Location = existingButton4.Location;
+            ButtonVColClose.Size = existingButton4.Size;
+            ButtonVColClose.Text = existingButton4.Text;
+            ButtonVColClose.Font = existingButton4.Font;
+            ButtonVColClose.MouseDown += buttonVColClose_MouseDown;
+            ButtonVColClose.MouseUp += buttonVCol_MouseUp;
+            // ... Set any other properties you need ...
+            this.Controls.Add(ButtonVColClose);
+            ButtonRotCW.Location = existingButton5.Location;
+            ButtonRotCW.Size = existingButton5.Size;
+            ButtonRotCW.Text = existingButton5.Text;
+            ButtonRotCW.Font = existingButton5.Font;
+            ButtonRotCW.MouseDown += buttonRotCW_MouseDown;
+            ButtonRotCW.MouseUp += buttonRot_MouseUp;
+            // ... Set any other properties you need ...
+            this.Controls.Add(ButtonRotCW);
+            ButtonRotCCW.Location = existingButton6.Location;
+            ButtonRotCCW.Size = existingButton6.Size;
+            ButtonRotCCW.Text = existingButton6.Text;
+            ButtonRotCCW.Font = existingButton6.Font;
+            ButtonRotCCW.MouseDown += buttonRotCW_MouseDown;
+            ButtonRotCCW.MouseUp += buttonRot_MouseUp;
+            // ... Set any other properties you need ...
+            this.Controls.Add(ButtonRotCCW);
 
             CheckPortsNames();
             this.TopMost = true;
-            StartTimer();
-        }
-
-        private void StartTimer()
-        {
-            t = new System.Windows.Forms.Timer();
-            t.Interval = 100;
-            t.Tick += new EventHandler(t_Tick);
-            t.Enabled = true;
-        }
-
-        // Make f_Tick async
-        private async void t_Tick(object sender, EventArgs e)
-        {
-            // await ReadUPD_Data(e); // Await the async method
-            if (OpenIrisDW)
-            {
-                OpenIrisDW = false;
-                if (serialPort1.IsOpen)
-                {
-                    dataOUT1 = "IC5";
-                    serialPort1.WriteLine(dataOUT1);
-                }
-            }
-            if (CloseIrisDW)
-            {
-                CloseIrisDW = false;
-                if (serialPort1.IsOpen)
-                {
-                    dataOUT1 = "IC-5";
-                    serialPort1.WriteLine(dataOUT1);
-                }
-            }
-            if (IrisUp)
-            {
-                IrisUp = false;
-                if (serialPort1.IsOpen)
-                {
-                    dataOUT1 = "IC0";
-                    serialPort1.WriteLine(dataOUT1);
-                }
-            }
-        }
-
-        // Make ReadUPD_Data async
-        private async Task ReadUPD_Data(EventArgs e)
-        {
-            string s = u.Read();
-            if (string.IsNullOrEmpty(s))
-                return;
-
-          //  textBoxUDP.Text = s;
-
-            switch (s)
-            {
-                case "Normal":
-                    // Code for Normal Field of View
-                    break;
-                case "Mag1":
-                    // Code for Mag1 Field of View
-                    break;
-                case "Mag2":
-                    // Code for Mag2 Field of View
-                    break;
-                default:
-                    // Optionally log unknown command
-                    break;
-            }
         }
 
         void CheckPortsNames()
@@ -200,6 +175,11 @@ namespace Colimator_Control_GUI
             }
         }
 
+        // Change the access modifier of serialPort1 from private to internal static
+        // Replace this line:
+        // private SerialPort serialPort1;
+        // With:
+        internal static SerialPort serialPortT;
         public async void OpenSerial1()     // Serial Port para la comunicacion con el Software Digirad
         {
             serialPort1.PortName = Serial1PortName;
@@ -265,7 +245,7 @@ namespace Colimator_Control_GUI
             }
         }
 
-        private void buttonIris_MouseUp(object sender, MouseEventArgs e)
+        public void buttonIris_MouseUp(object sender, MouseEventArgs e)
         {
             if (serialPort1.IsOpen)
             {
@@ -275,7 +255,7 @@ namespace Colimator_Control_GUI
 
         }
 
-        private void buttonIrisClose_MouseDown(object sender, MouseEventArgs e)
+        public void buttonIrisClose_MouseDown(object sender, MouseEventArgs e)
         {
             if (serialPort1.IsOpen)
             {
@@ -284,7 +264,7 @@ namespace Colimator_Control_GUI
             }
         }
 
-        private void buttonVColsOpen_MouseDown(object sender, MouseEventArgs e)
+        public void buttonVColOpen_MouseDown(object sender, MouseEventArgs e)
         {
             if (serialPort1.IsOpen)
             {
@@ -293,7 +273,7 @@ namespace Colimator_Control_GUI
             }
         }
 
-        private void buttonVColOpen_MouseUp(object sender, MouseEventArgs e)
+        public void buttonVCol_MouseUp(object sender, MouseEventArgs e)
         {
             if (serialPort1.IsOpen)
             {
@@ -302,7 +282,7 @@ namespace Colimator_Control_GUI
             }
         }
 
-        private void buttonVColsClose_MouseDown(object sender, MouseEventArgs e)
+        public void buttonVColClose_MouseDown(object sender, MouseEventArgs e)
         {
             if (serialPort1.IsOpen)
             {
@@ -311,16 +291,7 @@ namespace Colimator_Control_GUI
             }
         }
 
-        private void buttonVColClose_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (serialPort1.IsOpen)
-            {
-                dataOUT1 = "VC0";
-                serialPort1.WriteLine(dataOUT1);
-            }
-        }
-
-        private void buttonRotCW_MouseDown(object sender, MouseEventArgs e)
+        public void buttonRotCW_MouseDown(object sender, MouseEventArgs e)
         {
             if (serialPort1.IsOpen)
             {
@@ -329,7 +300,7 @@ namespace Colimator_Control_GUI
             }
         }
 
-        private void buttonRotCW_MouseUp(object sender, MouseEventArgs e)
+        public void buttonRot_MouseUp(object sender, MouseEventArgs e)
         {
             if (serialPort1.IsOpen)
             {
@@ -338,20 +309,11 @@ namespace Colimator_Control_GUI
             }
         }
 
-        private void buttonRotCCW_MouseDown(object sender, MouseEventArgs e)
+        public void buttonRotCCW_MouseDown(object sender, MouseEventArgs e)
         {
             if (serialPort1.IsOpen)
             {
                 dataOUT1 = "RO-5";
-                serialPort1.WriteLine(dataOUT1);
-            }
-        }
-
-        private void buttonRotCCW_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (serialPort1.IsOpen)
-            {
-                dataOUT1 = "RO0";
                 serialPort1.WriteLine(dataOUT1);
             }
         }
@@ -462,7 +424,7 @@ namespace Colimator_Control_GUI
         }
     }
  
-public class CustomButton : System.Windows.Forms.Button
+  public class CustomButton : System.Windows.Forms.Button
     {
         const int WM_POINTERDOWN = 0x0246;
         const int WM_POINTERUP = 0x0247;
@@ -470,6 +432,7 @@ public class CustomButton : System.Windows.Forms.Button
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
+            Form1 form = this.FindForm() as Form1;
 
             if (m.Msg == WM_POINTERDOWN)
             {
@@ -477,19 +440,64 @@ public class CustomButton : System.Windows.Forms.Button
                 if (this.Text == "Iris Open")
                 {
                     // Handle the Iris Open button "buttonIrisOpen_MouseDown"
-                    Form1.OpenIrisDW = true;
-
+                    // FIX: Provide required parameters for buttonIrisOpen_MouseDown
+                    if (form != null)
+                    {
+                        form.buttonIrisOpen_MouseDown(this, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
+                    }
                 }
-                else if (this.Text == "Iris Close")
+                if (this.Text == "Iris Close")
                 {
                     // Handle the Iris Close button "buttonIrisClose_MouseDown"
-                    Form1.CloseIrisDW = true;
+                    if (form != null)
+                    {
+                        form.buttonIrisClose_MouseDown(this, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
+                    }
+                }
+                if (this.Text == "Coll Open")
+                {
+                    // Handle the Iris Open button "buttonIrisOpen_MouseDown"
+                    // FIX: Provide required parameters for buttonIrisOpen_MouseDown
+                    if (form != null)
+                    {
+                        form.buttonVColOpen_MouseDown(this, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
+                    }
+                }
+                if (this.Text == "Coll Close")
+                {
+                    // Handle the Iris Close button "buttonIrisClose_MouseDown"
+                    if (form != null)
+                    {
+                        form.buttonVColClose_MouseDown(this, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
+                    }
+                }
+                if (this.Text == "Rot CW")
+                {
+                    // Handle the Iris Open button "buttonIrisOpen_MouseDown"
+                    // FIX: Provide required parameters for buttonIrisOpen_MouseDown
+                    if (form != null)
+                    {
+                        form.buttonRotCW_MouseDown(this, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
+                    }
+                }
+                if (this.Text == "Rot CCW")
+                {
+                    // Handle the Iris Close button "buttonIrisClose_MouseDown"
+                    if (form != null)
+                    {
+                        form.buttonRotCCW_MouseDown(this, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
+                    }
                 }
             }
             else if (m.Msg == WM_POINTERUP)
             {
                 // Handle pointer up event
-                Form1.IrisUp = true;
+                if (form != null)
+                {
+                    form.buttonIris_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
+                    form.buttonVCol_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
+                    form.buttonRot_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
+                }
             }
         }
     }

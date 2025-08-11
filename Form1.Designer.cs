@@ -84,8 +84,8 @@
             this.buttonVColOpen.TabIndex = 2;
             this.buttonVColOpen.Text = "Coll Open";
             this.buttonVColOpen.UseVisualStyleBackColor = true;
-            this.buttonVColOpen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonVColsOpen_MouseDown);
-            this.buttonVColOpen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonVColOpen_MouseUp);
+            this.buttonVColOpen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonVColOpen_MouseDown);
+            this.buttonVColOpen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonVCol_MouseUp);
             // 
             // buttonVColClose
             // 
@@ -95,8 +95,8 @@
             this.buttonVColClose.TabIndex = 3;
             this.buttonVColClose.Text = "Coll Close";
             this.buttonVColClose.UseVisualStyleBackColor = true;
-            this.buttonVColClose.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonVColsClose_MouseDown);
-            this.buttonVColClose.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonVColClose_MouseUp);
+            this.buttonVColClose.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonVColClose_MouseDown);
+            this.buttonVColClose.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonVCol_MouseUp);
             // 
             // buttonRotCW
             // 
@@ -107,7 +107,7 @@
             this.buttonRotCW.Text = "Rot CW";
             this.buttonRotCW.UseVisualStyleBackColor = true;
             this.buttonRotCW.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonRotCW_MouseDown);
-            this.buttonRotCW.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonRotCW_MouseUp);
+            this.buttonRotCW.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonRot_MouseUp);
             // 
             // buttonRotCCW
             // 
@@ -118,7 +118,7 @@
             this.buttonRotCCW.Text = "Rot CCW";
             this.buttonRotCCW.UseVisualStyleBackColor = true;
             this.buttonRotCCW.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonRotCCW_MouseDown);
-            this.buttonRotCCW.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonRotCCW_MouseUp);
+            this.buttonRotCCW.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonRot_MouseUp);
             // 
             // buttonReset
             // 
